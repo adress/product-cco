@@ -48,7 +48,8 @@ ProductoSchema.plugin(mongoosePaginate);
 
 ProductoSchema.methods.toJSON = function () {
     //remueve  __v al realizar .toJSON
-    const { __v, ...data } = this.toObject();
+    const { __v, _id, ...data } = this.toObject();
+    usuario.id = _id; //remplaze _id to id
     return data;
 }
 
