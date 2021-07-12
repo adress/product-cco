@@ -48,9 +48,9 @@ ProductoSchema.plugin(mongoosePaginate);
 
 ProductoSchema.methods.toJSON = function () {
     //remueve  __v al realizar .toJSON
-    const { __v, _id, ...data } = this.toObject();
-    usuario.id = _id; //remplaze _id to id
-    return data;
+    const { __v, _id, ...producto } = this.toObject();
+    producto.id = _id; //remplaze _id to id
+    return producto;
 }
 
 module.exports = model('Producto', ProductoSchema)
