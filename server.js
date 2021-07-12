@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { dbConnection } = require('./database/config');
-//const fileUpload = require('express-fileupload');
+const fileUpload = require('express-fileupload');
 
 class Server {
 
@@ -24,17 +24,18 @@ class Server {
         this.app.use(cors()); //previene el cross original acess error.
         this.app.use(express.json()) //escritura y parseo del body
         this.app.use(express.static('public')) //middleware define la carpeta publica
-        // //carga de archivos
-        // this.app.use(fileUpload({
-        //     useTempFiles: true,
-        //     tempFileDir: '/tmp/',
-        //     createParentPath: true
-        // }));
+        //configuracion del middleware para la carga de archivos
+        this.app.use(fileUpload({
+            useTempFiles: true,
+            tempFileDir: '/tmp/',
+            createParentPath: true
+        }));
     }
 
     //definicion de las rutas del servidor
     routes() {
         this.app.use('/api/productos', require('./routes/productosRoute'));
+        this.app.use('/api/upload', require('./routes/uploadRoute'));
     }
 
     //up server

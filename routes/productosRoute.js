@@ -7,7 +7,6 @@ const { existeProductoPorId } = require('../helpers/producto-validator');
 const { reglas } = require('../middlewares/validar-campos-producto');
 
 const router = Router();
-//configuracion de las rutas que provienen del controladord
 
 //index
 router.get('/', index);
